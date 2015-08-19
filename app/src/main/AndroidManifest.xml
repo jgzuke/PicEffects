@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="nl.changer.polypicker.ImagePickerActivity" />
+        <activity android:name="nl.changer.polypicker.ImagePickerActivity" />
     </application>
 </manifest>
