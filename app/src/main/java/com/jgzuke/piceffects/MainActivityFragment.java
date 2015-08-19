@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gc.materialdesign.views.ButtonFloat;
-
 import nl.changer.polypicker.Config;
 import nl.changer.polypicker.ImagePickerActivity;
 
@@ -22,15 +20,11 @@ import nl.changer.polypicker.ImagePickerActivity;
 public class MainActivityFragment extends Fragment {
     private static final int INTENT_REQUEST_GET_IMAGES = 1;
 
-    private ButtonFloat mInsertPictureButton;
-
-    private Uri[] mUris;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mInsertPictureButton = (ButtonFloat) view.findViewById(R.id.insertPictureButton);
-        mInsertPictureButton.setOnClickListener(new View.OnClickListener() {
+        View insertPicture = view.findViewById(R.id.insertPictureButton);
+        insertPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pickImages();
@@ -57,8 +51,9 @@ public class MainActivityFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK && requestCode == INTENT_REQUEST_GET_IMAGES) {
             Parcelable[] parcelableUris = intent.getParcelableArrayExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
             if (parcelableUris != null) {
-                mUris = new Uri[parcelableUris.length];
-                System.arraycopy(parcelableUris, 0, mUris, 0, parcelableUris.length);
+                Uri[] uris = new Uri[parcelableUris.length];
+                System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
+                ((MainActivity)getActivity()).getPictureUris(uris);
             }
         }
     }
