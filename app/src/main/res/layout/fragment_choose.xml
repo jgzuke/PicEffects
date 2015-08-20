@@ -22,12 +22,14 @@
         android:text="@string/ascii"
         android:layout_below="@id/chooseTitle"
         android:layout_centerHorizontal="true"
-        android:textSize="15sp" />
+        android:layout_marginBottom="20dp"
+        android:textSize="17sp" />
 
     <LinearLayout
         android:id="@+id/ascii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/chooseEffect"
         android:orientation="vertical" >
 
         <TextView
@@ -41,6 +43,7 @@
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/chooseEffect"
         android:orientation="vertical"
         android:visibility="gone" >
 
