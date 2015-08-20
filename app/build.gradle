@@ -44,4 +44,5 @@ dependencies {
     compile 'com.github.jaydeepw:poly-picker:v1.0.14'
     compile 'com.nineoldandroids:library:2.4.0+'
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile 'com.weiwangcn.betterspinner:library-material:1.1.0'
 }
