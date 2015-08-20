@@ -14,23 +14,24 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
+        openFragment(new StartFragment());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mFragmentManager = getSupportFragmentManager();
     }
 
-    private void swapFragment(Fragment fragment) {
+    private void openFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, fragment);
+        fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
 
     public void getPictureUris(Uri[] uris) {
         ChooseFragment choose = new ChooseFragment();
-        swapFragment(choose);
+        openFragment(choose);
     }
 }
