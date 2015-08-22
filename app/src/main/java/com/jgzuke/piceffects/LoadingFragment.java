@@ -11,7 +11,7 @@ import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 /**
  * Created by jgzuke on 15-08-22.
  */
-public class LoadingFragment extends Fragment {
+public class LoadingFragment extends BaseFragment {
 
     private AnimatedCircleLoadingView mLoadingView;
 
@@ -26,12 +26,19 @@ public class LoadingFragment extends Fragment {
         return view;
     }
 
-    public void updateProgress(int progress) {
-        mLoadingView.setPercent(progress);
-
+    public void updateProgress(double progress) {
+        if(mLoadingView != null) {
+            mLoadingView.setPercent((int) progress);
+        }
     }
 
     public void taskFailed() {
-        mLoadingView.stopFailure();
+        if(mLoadingView != null) {
+            mLoadingView.stopFailure();
+        }
+    }
+
+    public void getASCIIResults(String[] results) {
+        mActivity.getASCIIResults(results);
     }
 }

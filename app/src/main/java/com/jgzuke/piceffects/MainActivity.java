@@ -17,7 +17,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
-        openFragment(new StartFragment());
+        openFragment(new StartFragment().setActivity(this));
     }
 
     @Override
@@ -33,20 +33,23 @@ public class MainActivity extends FragmentActivity {
 
     public void getPictureUris(Uri[] uris) {
         mUris = uris;
-        openFragment(new ChooseFragment());
+        openFragment(new ChooseFragment().setActivity(this));
     }
 
     public void convertPictures(int action) {
-        LoadingFragment loading = new LoadingFragment();
+        BaseFragment loading = new LoadingFragment().setActivity(this);
         openFragment(loading);
         switch(action) {
             case ChooseFragment.ASCII:
-                //openFragment(choose);
+                new ASCIIConversionTask(this, loading).doInBackground(mUris);
                 break;
             default:
-                //ChooseFragment choose = new ChooseFragment();
-                //openFragment(choose);
+                new ASCIIConversionTask(this, loading).doInBackground(mUris);
                 break;
         }
+    }
+
+    public void getASCIIResults(String[] results) {
+        openFragment(new ChooseFragment().setActivity(this));
     }
 }

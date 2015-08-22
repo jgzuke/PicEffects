@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import nl.changer.polypicker.Config;
 import nl.changer.polypicker.ImagePickerActivity;
 
-public class StartFragment extends Fragment {
+public class StartFragment extends BaseFragment {
     private static final int INTENT_REQUEST_GET_IMAGES = 1;
 
     @Override
@@ -30,7 +30,7 @@ public class StartFragment extends Fragment {
     }
 
     private void pickImages() {
-        Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+        Intent intent = new Intent(mActivity, ImagePickerActivity.class);
         Config config = new Config.Builder()
                 .setTabBackgroundColor(R.color.white)
                 .setTabSelectionIndicatorColor(R.color.blue)
@@ -49,7 +49,7 @@ public class StartFragment extends Fragment {
             if (parcelableUris != null) {
                 Uri[] uris = new Uri[parcelableUris.length];
                 System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
-                ((MainActivity)getActivity()).getPictureUris(uris);
+                mActivity.getPictureUris(uris);
             }
         }
     }

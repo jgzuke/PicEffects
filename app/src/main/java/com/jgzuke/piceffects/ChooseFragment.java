@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
-public class ChooseFragment extends Fragment {
+public class ChooseFragment extends BaseFragment {
     public static final int ASCII = 0;
     public static final int TEST = 1;
     private static final String[] OPTIONS = new String[] {
@@ -28,7 +28,7 @@ public class ChooseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.fragment_choose, container, false);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, OPTIONS);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity, android.R.layout.simple_dropdown_item_1line, OPTIONS);
         MaterialBetterSpinner textView = (MaterialBetterSpinner) view.findViewById(R.id.chooseEffect);
         textView.setAdapter(adapter);
         textView.addTextChangedListener(new TextWatcher() {
@@ -61,7 +61,7 @@ public class ChooseFragment extends Fragment {
     }
 
     private void convertPictures() {
-        ((MainActivity)getActivity()).convertPictures(mAction);
+        mActivity.convertPictures(mAction);
     }
 
     private void textChanged(String text) {
