@@ -12,7 +12,8 @@ import android.widget.ArrayAdapter;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class ChooseFragment extends Fragment {
-
+    public static final int ASCII = 0;
+    public static final int TEST = 1;
     private static final String[] OPTIONS = new String[] {
             "ASCII", "test"
     };
@@ -20,6 +21,8 @@ public class ChooseFragment extends Fragment {
             R.id.ascii, R.id.test
     };
     private static View[] OPTION_SCREENS;
+
+    private int mAction = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -58,12 +61,17 @@ public class ChooseFragment extends Fragment {
     }
 
     private void convertPictures() {
-
+        ((MainActivity)getActivity()).convertPictures(mAction);
     }
 
     private void textChanged(String text) {
         for(int i = 0; i < OPTIONS.length; i++) {
-            OPTION_SCREENS[i].setVisibility(text.equals(OPTIONS[i])? View.VISIBLE : View.GONE);
+            if(text.equals(OPTIONS[i])) {
+                mAction = i;
+                OPTION_SCREENS[i].setVisibility(View.VISIBLE);
+            } else {
+                OPTION_SCREENS[i].setVisibility(View.GONE);
+            }
         }
     }
 }

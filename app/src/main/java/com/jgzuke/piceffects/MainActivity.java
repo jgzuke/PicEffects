@@ -10,6 +10,7 @@ import android.os.Bundle;
 public class MainActivity extends FragmentActivity {
 
     private FragmentManager mFragmentManager;
+    private Uri[] mUris;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,21 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void getPictureUris(Uri[] uris) {
-        ChooseFragment choose = new ChooseFragment();
-        openFragment(choose);
+        mUris = uris;
+        openFragment(new ChooseFragment());
+    }
+
+    public void convertPictures(int action) {
+        LoadingFragment loading = new LoadingFragment();
+        openFragment(loading);
+        switch(action) {
+            case ChooseFragment.ASCII:
+                //openFragment(choose);
+                break;
+            default:
+                //ChooseFragment choose = new ChooseFragment();
+                //openFragment(choose);
+                break;
+        }
     }
 }

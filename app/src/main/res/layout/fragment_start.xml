@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="#1E88E5"
+        android:background="@color/main"
         materialdesign:animate="false"
         materialdesign:iconDrawable="@drawable/ic_insert_photo_white_48dp" />
 
