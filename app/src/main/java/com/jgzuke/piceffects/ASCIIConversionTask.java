@@ -24,20 +24,21 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     @Override
     protected Void doInBackground(Uri[]... params) {
         Uri[] uris = params[0];
+        String[] results = new String[uris.length];
         for(int i = 0; i < uris.length; i++) {
             try {
-                convertPicture(MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uris[i]));
+                results[i] = convertPicture(MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uris[i]));
             } catch (IOException e) {
                 e.printStackTrace();
             }
             mLoading.updateProgress((i+1)/uris.length);
         }
-        Log.e("myid", "doInBackground");
-        mLoading.getASCIIResults(new String[0]);
+        mLoading.getASCIIResults(results);
         return null;
     }
 
-    private void convertPicture(Bitmap image) {
+    private String convertPicture(Bitmap image) {
 
+        return "";
     }
 }

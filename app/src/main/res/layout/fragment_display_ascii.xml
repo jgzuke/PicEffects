@@ -1,0 +1,25 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="80dp" >
+
+    <TextView
+        android:id="@+id/finishTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finished"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/ascii_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/finishTitle"
+        android:text="ascii"
+        android:textSize="30sp" />
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 public class MainActivity extends FragmentActivity {
 
     private FragmentManager mFragmentManager;
+    private BaseFragment mFragment;
     private Uri[] mUris;
 
     @Override
@@ -25,15 +26,18 @@ public class MainActivity extends FragmentActivity {
         super.onResume();
     }
 
-    private void openFragment(Fragment fragment) {
+    private void openFragment(BaseFragment fragment) {
+        mFragment = fragment;
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.replace(R.id.container, mFragment);
         fragmentTransaction.commit();
     }
 
     public void getPictureUris(Uri[] uris) {
         mUris = uris;
-        openFragment(new ChooseFragment().setActivity(this));
+        if(uris.length > 0) {
+            openFragment(new ChooseFragment().setActivity(this));
+        }
     }
 
     public void convertPictures(int action) {
@@ -50,6 +54,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void getASCIIResults(String[] results) {
-        openFragment(new ChooseFragment().setActivity(this));
+        openFragment(new DisplayASCIIFragment().setActivity(this));
+        ((DisplayASCIIFragment) mFragment).setText(results);
     }
 }
