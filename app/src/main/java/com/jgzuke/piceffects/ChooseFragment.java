@@ -60,7 +60,14 @@ public class ChooseFragment extends BaseFragment {
     }
 
     private void convertPictures() {
-        mActivity.convertPictures(mAction);
+        switch(mAction) {
+            case ASCII:
+                mActivity.convertPicturesASCII(100);
+                break;
+            default:
+                mActivity.pickImages();
+                break;
+        }
     }
 
     private void textChanged(String text) {

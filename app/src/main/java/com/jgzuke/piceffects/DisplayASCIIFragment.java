@@ -59,13 +59,15 @@ public class DisplayASCIIFragment extends BaseFragment {
     }
 
     private void resizeText() {
-        Rect bounds = new Rect();
-        Paint textPaint = mASCIIDisplay.getPaint();
-        textPaint.getTextBounds(mResults[0],0,110,bounds);
-        int textWidth = bounds.width();
+        /*Rect bounds = new Rect();
+        Paint textPaint = new Paint();
+        textPaint.setTextSize(2);
+        textPaint.setTypeface(Typeface.MONOSPACE);
+        textPaint.getTextBounds(mResults[0],0,110,bounds);*/
+        float textWidth = mASCIIDisplay.getMeasuredWidth();
 
-        int containerWidth = mASCIIDisplayContainer.getMeasuredWidth();
-        float textSize = (float) containerWidth / textWidth;
+        float containerWidth = mASCIIDisplayContainer.getMeasuredWidth();
+        float textSize = containerWidth / textWidth;
         mASCIIDisplay.setTextSize(textSize);
     }
 }

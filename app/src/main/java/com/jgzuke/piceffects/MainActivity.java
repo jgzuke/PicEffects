@@ -46,17 +46,10 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public void convertPictures(int action) {
+    public void convertPicturesASCII(int charsX) {
         BaseFragment loading = new LoadingFragment().setActivity(this);
         openFragment(loading);
-        switch(action) {
-            case ChooseFragment.ASCII:
-                new ASCIIConversionTask(this, loading).doInBackground(mUris);
-                break;
-            default:
-                new ASCIIConversionTask(this, loading).doInBackground(mUris);
-                break;
-        }
+        new ASCIIConversionTask(this, loading).doInBackground(mUris);
     }
 
     public void getASCIIResults(String[] results) {
