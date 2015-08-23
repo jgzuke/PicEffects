@@ -1,5 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="80dp" >
@@ -21,5 +22,15 @@
         android:layout_below="@id/finishTitle"
         android:text="ascii"
         android:textSize="6sp" />
+
+    <com.gc.materialdesign.views.ButtonFloat
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        materialdesign:animate="false"
+        materialdesign:iconDrawable="@drawable/ic_replay_white_48dp" />
 
 </RelativeLayout>

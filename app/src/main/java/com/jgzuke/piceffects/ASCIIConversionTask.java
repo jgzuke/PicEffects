@@ -65,7 +65,7 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private String convertPicture(Bitmap image) {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
-        charsY = charsX * imageHeight * 5 / 3 / imageWidth;
+        charsY = charsX * imageHeight * 2 / imageWidth;
         StringBuilder result = new StringBuilder();
         for(int i = 0; i < charsX; i++) {
             for(int j = 0; j < charsY; j++) {

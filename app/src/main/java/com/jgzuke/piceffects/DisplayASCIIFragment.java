@@ -23,10 +23,21 @@ public class DisplayASCIIFragment extends BaseFragment {
         mASCIIDisplay.setText(mResults[0]);
         mASCIIDisplay.setTypeface(Typeface.MONOSPACE);
 
+        View retryButton = view.findViewById(R.id.retry_button);
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartFromBeginning();
+            }
+        });
         return view;
     }
 
     public void setText(String[] results) {
         mResults = results;
+    }
+
+    private void restartFromBeginning() {
+        mActivity.pickImages();
     }
 }

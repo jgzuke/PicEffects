@@ -1,5 +1,8 @@
 package com.jgzuke.piceffects;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +10,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 
+import nl.changer.polypicker.Config;
+import nl.changer.polypicker.ImagePickerActivity;
+
 public class MainActivity extends FragmentActivity {
+    private static final int INTENT_REQUEST_GET_IMAGES = 1;
 
     private FragmentManager mFragmentManager;
     private BaseFragment mFragment;
@@ -56,5 +63,30 @@ public class MainActivity extends FragmentActivity {
     public void getASCIIResults(String[] results) {
         openFragment(new DisplayASCIIFragment().setActivity(this));
         ((DisplayASCIIFragment) mFragment).setText(results);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == INTENT_REQUEST_GET_IMAGES) {
+            Parcelable[] parcelableUris = intent.getParcelableArrayExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
+            if (parcelableUris != null) {
+                Uri[] uris = new Uri[parcelableUris.length];
+                System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
+                getPictureUris(uris);
+            }
+        }
+    }
+
+    public void pickImages() {
+        Intent intent = new Intent(this, ImagePickerActivity.class);
+        Config config = new Config.Builder()
+                .setTabBackgroundColor(R.color.white)
+                .setTabSelectionIndicatorColor(R.color.blue)
+                .setCameraButtonColor(R.color.green)
+                .build();
+        ImagePickerActivity.setConfig(config);
+        startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
     }
 }
