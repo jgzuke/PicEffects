@@ -3,24 +3,12 @@
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
-    android:paddingTop="80dp" >
-
-    <TextView
-        android:id="@+id/finishTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/finished"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="30dp"
-        android:textSize="30sp" />
+    android:padding="40dp" >
 
     <ScrollView
         android:id="@+id/ascii_display_container"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/finishTitle" >
+        android:layout_height="fill_parent" >
         <TextView
             android:id="@+id/ascii_display"
             android:layout_width="wrap_content"

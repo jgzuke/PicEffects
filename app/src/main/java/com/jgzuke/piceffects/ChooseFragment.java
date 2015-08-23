@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.gc.materialdesign.views.Slider;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class ChooseFragment extends BaseFragment {
@@ -21,6 +22,7 @@ public class ChooseFragment extends BaseFragment {
     };
     private static View[] OPTION_SCREENS;
 
+    private Slider mSizeSlider;
     private int mAction = 0;
 
     @Override
@@ -32,10 +34,12 @@ public class ChooseFragment extends BaseFragment {
         textView.setAdapter(adapter);
         textView.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -51,6 +55,8 @@ public class ChooseFragment extends BaseFragment {
             }
         });
 
+        mSizeSlider = (Slider) view.findViewById(R.id.size_slider);
+
         OPTION_SCREENS = new View[OPTIONS.length];
         for(int i = 0; i < OPTIONS.length; i++) {
             OPTION_SCREENS[i] = view.findViewById(OPTION_SCREEN_IDS[i]);
@@ -62,7 +68,7 @@ public class ChooseFragment extends BaseFragment {
     private void convertPictures() {
         switch(mAction) {
             case ASCII:
-                mActivity.convertPicturesASCII(100);
+                mActivity.convertPicturesASCII(mSizeSlider.getValue());
                 break;
             default:
                 mActivity.pickImages();

@@ -14,12 +14,12 @@ import java.io.IOException;
  * Created by jgzuke on 15-08-22.
  */
 public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
-    private static final double WHRatio = 0.47;
+    private static final double WHRatio = 5.0/11.0; //46;
     private static final char[][] SYMBOLS = new char[][] {
-            new char[] {'#'},
-            new char[] {'|'},
-            new char[] {'-'},
-            new char[] {' '}
+            new char[] {'#', '%'},
+            new char[] {'|', '[', ']', '/', '\\', '*'},
+            new char[] {'-', '_', '^', '<', '>', '=', '+', ':'},
+            new char[] {' ', '\'', '.'}
     };
 
     private int charsX = 110;
