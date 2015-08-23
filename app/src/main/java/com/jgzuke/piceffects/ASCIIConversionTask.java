@@ -14,6 +14,7 @@ import java.io.IOException;
  * Created by jgzuke on 15-08-22.
  */
 public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
+    private static final double WHRatio = 0.47;
     private static final char[][] SYMBOLS = new char[][] {
             new char[] {'#'},
             new char[] {'|'},
@@ -67,7 +68,7 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private String convertPicture(Bitmap image) {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
-        charsY = charsX * imageHeight / 2 / imageWidth;
+        charsY = (int)(WHRatio * charsX * imageHeight / imageWidth);
         StringBuilder result = new StringBuilder();
         for(int j = 0; j < charsY; j++) {
             for(int i = 0; i < charsX; i++) {
