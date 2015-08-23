@@ -18,13 +18,13 @@ import java.io.IOException;
  */
 public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private static final char[][] SYMBOLS = new char[][] {
-            new char[] {' '},
+            new char[] {'#'},
+            new char[] {'|'},
             new char[] {'-'},
-            new char[] {'*'},
-            new char[] {'#'}
+            new char[] {' '}
     };
 
-    private int charsX = 20;
+    private int charsX = 12;
     private int charsY = 20;
 
     private LoadingFragment mLoading;
@@ -60,28 +60,22 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
             e.printStackTrace();
             return null;
         }
-        /*String[] filePathColumn = { MediaStore.Images.Media.DATA };
-        Cursor cursor = mContext.getContentResolver().query(uri, filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        String picturePath = cursor.getString(columnIndex);
-        cursor.close();
-        File file = new File(picturePath);
-        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());*/
     }
 
     private String convertPicture(Bitmap image) {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
+        charsY = charsX * imageHeight * 5 / 3 / imageWidth;
         StringBuilder result = new StringBuilder();
         for(int i = 0; i < charsX; i++) {
-            for(int j = 0; j < charsY; i++) {
+            for(int j = 0; j < charsY; j++) {
                 int x1 = imageWidth  *   i   / charsX;
                 int x2 = imageWidth  * (i+1) / charsX;
                 int y1 = imageHeight *   j   / charsY;
                 int y2 = imageHeight * (j+1) / charsY;
                 result.append(getChar(x1, y1, x2, y2, image));
             }
+            result.append("\n");
         }
         return result.toString();
     }
@@ -95,15 +89,14 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
 
     private int getBrightnessLevel(int x1, int y1, int x2, int y2, Bitmap image) {
         int brightness = 0;
-        for(int i = x1; i < y1; i++) {
+        for(int i = x1; i < x2; i++) {
             for(int j = y1; j < y2; j++) {
                 int color = image.getPixel(i, j);
                 float[] rgb = { Color.red(color), Color.green(color), Color.blue(color) };
                 brightness += (int) ((rgb[0]*.241) + (rgb[1]*.691) + (rgb[2]*.068));
             }
         }
-        brightness /= ((x2-x1) * (y1-y2));
-        //brightness is between 0-255
+        brightness /= ((x2-x1) * (y2-y1));
         return brightness / 64; // 0,1,2,3
     }
 }

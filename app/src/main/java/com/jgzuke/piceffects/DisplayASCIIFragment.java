@@ -1,5 +1,6 @@
 package com.jgzuke.piceffects;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class DisplayASCIIFragment extends BaseFragment {
 
         mASCIIDisplay = (TextView) view.findViewById(R.id.ascii_display);
         mASCIIDisplay.setText(mResults[0]);
+        mASCIIDisplay.setTypeface(Typeface.MONOSPACE);
 
         return view;
     }

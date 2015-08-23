@@ -16,10 +16,10 @@
 
     <TextView
         android:id="@+id/ascii_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@id/finishTitle"
         android:text="ascii"
-        android:textSize="30sp" />
+        android:textSize="6sp" />
 
 </RelativeLayout>
