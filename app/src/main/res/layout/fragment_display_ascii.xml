@@ -3,10 +3,8 @@
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="80dp"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    android:paddingBottom="30dp">
+    android:padding="40dp"
+    android:paddingTop="80dp" >
 
     <TextView
         android:id="@+id/finishTitle"
@@ -15,16 +13,20 @@
         android:text="@string/finished"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/ascii_display"
+    <ScrollView
+        android:id="@+id/ascii_display_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/finishTitle"
-        android:text="ascii"
-        android:textSize="5sp" />
+        android:layout_below="@id/finishTitle" >
+        <TextView
+            android:id="@+id/ascii_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </ScrollView>
 
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/retry_button"

@@ -22,7 +22,7 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
             new char[] {' '}
     };
 
-    private int charsX = 40;
+    private int charsX = 110;
     private int charsY;
 
     private LoadingFragment mLoading;
