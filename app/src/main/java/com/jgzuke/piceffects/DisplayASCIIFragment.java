@@ -19,12 +19,12 @@ public class DisplayASCIIFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_display_ascii, container, false);
 
         mASCIIDisplay = (TextView) view.findViewById(R.id.ascii_display);
+        mASCIIDisplay.setText(mResults[0]);
 
         return view;
     }
 
     public void setText(String[] results) {
         mResults = results;
-        mASCIIDisplay.setText(results[0]);
     }
 }
