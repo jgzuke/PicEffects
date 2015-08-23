@@ -2,6 +2,7 @@ package com.jgzuke.piceffects;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,8 +22,8 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
             new char[] {' '}
     };
 
-    private int charsX = 12;
-    private int charsY = 20;
+    private int charsX = 40;
+    private int charsY;
 
     private LoadingFragment mLoading;
     private Context mContext;
@@ -52,7 +53,11 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
         Uri uri2 = Uri.parse("file://"+uri.toString());
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri2);
-            return bitmap;
+            int oldWidth = bitmap.getWidth();
+            int newWidth = 5 * charsX;
+            int newHeight = bitmap.getHeight() * newWidth / oldWidth;
+            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
+            return scaled;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -62,10 +67,10 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private String convertPicture(Bitmap image) {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
-        charsY = charsX * imageHeight * 2 / imageWidth;
+        charsY = charsX * imageHeight / 2 / imageWidth;
         StringBuilder result = new StringBuilder();
-        for(int i = 0; i < charsX; i++) {
-            for(int j = 0; j < charsY; j++) {
+        for(int j = 0; j < charsY; j++) {
+            for(int i = 0; i < charsX; i++) {
                 int x1 = imageWidth  *   i   / charsX;
                 int x2 = imageWidth  * (i+1) / charsX;
                 int y1 = imageHeight *   j   / charsY;
