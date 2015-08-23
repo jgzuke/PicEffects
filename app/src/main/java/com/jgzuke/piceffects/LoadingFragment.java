@@ -38,7 +38,7 @@ public class LoadingFragment extends BaseFragment {
         }
     }
 
-    public void getASCIIResults(String[] results) {
-        mActivity.getASCIIResults(results);
+    public void getASCIIResults(String[] results, int charsX) {
+        mActivity.getASCIIResults(results, charsX);
     }
 }

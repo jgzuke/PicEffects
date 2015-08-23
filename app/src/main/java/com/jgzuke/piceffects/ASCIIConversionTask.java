@@ -2,7 +2,6 @@ package com.jgzuke.piceffects;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,9 +27,10 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private LoadingFragment mLoading;
     private Context mContext;
 
-    public ASCIIConversionTask(Context context, BaseFragment loading) {
+    public ASCIIConversionTask(Context context, BaseFragment loading, int chars) {
         mContext = context;
         mLoading = (LoadingFragment) loading;
+        charsX = chars;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
             }
             mLoading.updateProgress((i + 1) / uris.length);
         }
-        mLoading.getASCIIResults(results);
+        mLoading.getASCIIResults(results, charsX);
         return null;
     }
 

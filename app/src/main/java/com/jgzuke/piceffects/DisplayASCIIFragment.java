@@ -18,6 +18,7 @@ public class DisplayASCIIFragment extends BaseFragment {
     private View mASCIIDisplayContainer;
 
     private String[] mResults;
+    private int mCharsX;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -50,8 +51,9 @@ public class DisplayASCIIFragment extends BaseFragment {
         return view;
     }
 
-    public void setText(String[] results) {
+    public void setText(String[] results, int charsX) {
         mResults = results;
+        mCharsX = charsX;
     }
 
     private void restartFromBeginning() {

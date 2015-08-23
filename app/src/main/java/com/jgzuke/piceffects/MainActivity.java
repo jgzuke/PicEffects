@@ -49,12 +49,12 @@ public class MainActivity extends FragmentActivity {
     public void convertPicturesASCII(int charsX) {
         BaseFragment loading = new LoadingFragment().setActivity(this);
         openFragment(loading);
-        new ASCIIConversionTask(this, loading).doInBackground(mUris);
+        new ASCIIConversionTask(this, loading, charsX).doInBackground(mUris);
     }
 
-    public void getASCIIResults(String[] results) {
+    public void getASCIIResults(String[] results, int charsX) {
         openFragment(new DisplayASCIIFragment().setActivity(this));
-        ((DisplayASCIIFragment) mFragment).setText(results);
+        ((DisplayASCIIFragment) mFragment).setText(results, charsX);
     }
 
     @Override
