@@ -47,14 +47,9 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void convertPicturesASCII(int charsX) {
-        BaseFragment loading = new LoadingFragment().setActivity(this);
-        openFragment(loading);
-        new ASCIIConversionTask(this, loading, charsX).doInBackground(mUris);
-    }
-
-    public void getASCIIResults(String[] results, int charsX) {
         openFragment(new DisplayASCIIFragment().setActivity(this));
-        ((DisplayASCIIFragment) mFragment).setText(results, charsX);
+        ((DisplayASCIIFragment) mFragment).setLineLength(charsX);
+        new ASCIIConversionTask(this, mFragment, charsX).execute(mUris);
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by jgzuke on 15-08-22.
  */
-public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
+public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
     private static final double WHRatio = 5.0/11.0; //46;
     private static final char[][] SYMBOLS = new char[][] {
             new char[] {'#', '%'},
@@ -25,33 +25,35 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
     private int charsX = 110;
     private int charsY;
 
-    private LoadingFragment mLoading;
+    private DisplayASCIIFragment mDisplay;
     private Context mContext;
+    private StringBuilder mResults;
 
     public ASCIIConversionTask(Context context, BaseFragment loading, int chars) {
         mContext = context;
-        mLoading = (LoadingFragment) loading;
+        mDisplay = (DisplayASCIIFragment) loading;
         charsX = chars;
     }
 
     @Override
     protected Void doInBackground(Uri[]... params) {
         Uri[] uris = params[0];
-        String[] results = new String[uris.length];
+        mResults = new StringBuilder();
         for(int i = 0; i < uris.length; i++) {
             Bitmap image = getBitmapFromUri(uris[i]);
             if(image != null) {
-                results[i] = convertPicture(image);
+                convertPicture(image);
             }
-            mLoading.updateProgress((i + 1) / uris.length);
         }
-        mLoading.getASCIIResults(results, charsX);
         return null;
     }
 
+    private void publishResults() {
+        publishProgress(mResults.toString());
+    }
+
     private Bitmap getBitmapFromUri(Uri uri) {
-        Log.e("myid", "uri: " + uri.toString());
-        Uri uri2 = Uri.parse("file://"+uri.toString());
+        Uri uri2 = Uri.parse("file://" + uri.toString());
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri2);
             int oldWidth = bitmap.getWidth();
@@ -65,22 +67,22 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
         }
     }
 
-    private String convertPicture(Bitmap image) {
+    private void convertPicture(Bitmap image) {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
         charsY = (int)(WHRatio * charsX * imageHeight / imageWidth);
-        StringBuilder result = new StringBuilder();
         for(int j = 0; j < charsY; j++) {
             for(int i = 0; i < charsX; i++) {
                 int x1 = imageWidth  *   i   / charsX;
                 int x2 = imageWidth  * (i+1) / charsX;
                 int y1 = imageHeight *   j   / charsY;
                 int y2 = imageHeight * (j+1) / charsY;
-                result.append(getChar(x1, y1, x2, y2, image));
+                mResults.append(getChar(x1, y1, x2, y2, image));
             }
-            result.append("\n");
+            publishResults();
+            mResults.append("\n");
         }
-        return result.toString();
+        mResults.append("\n\n");
     }
 
     private char getChar(int x1, int y1, int x2, int y2, Bitmap image) {
@@ -101,5 +103,10 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], Void, Void> {
         }
         brightness /= ((x2-x1) * (y2-y1));
         return brightness / 64; // 0,1,2,3
+    }
+
+    @Override
+    protected void onProgressUpdate(String... progress) {
+        mDisplay.updateProgress(progress[0]);
     }
 }

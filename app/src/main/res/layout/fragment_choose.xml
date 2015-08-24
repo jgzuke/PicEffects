@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/size"
+            android:text="@string/brightness"
             android:textSize="17sp" />
         <com.gc.materialdesign.views.Slider
             android:id="@+id/brightness_slider"
