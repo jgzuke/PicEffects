@@ -42,8 +42,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/main"
-            materialdesign:min="10"
-            materialdesign:max="400"
+            materialdesign:min="30"
+            materialdesign:max="300"
             materialdesign:showNumberIndicator="true"/>
 
     </LinearLayout>
