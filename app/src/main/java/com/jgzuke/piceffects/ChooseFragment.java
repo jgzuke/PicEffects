@@ -23,6 +23,7 @@ public class ChooseFragment extends BaseFragment {
     private static View[] OPTION_SCREENS;
 
     private Slider mSizeSlider;
+    private Slider mBrightnessSlider;
     private int mAction = 0;
 
     @Override
@@ -56,6 +57,9 @@ public class ChooseFragment extends BaseFragment {
         });
 
         mSizeSlider = (Slider) view.findViewById(R.id.size_slider);
+        mBrightnessSlider.setValue(60);
+        mBrightnessSlider = (Slider) view.findViewById(R.id.size_slider);
+        mBrightnessSlider.setValue(50);
 
         OPTION_SCREENS = new View[OPTIONS.length];
         for(int i = 0; i < OPTIONS.length; i++) {
