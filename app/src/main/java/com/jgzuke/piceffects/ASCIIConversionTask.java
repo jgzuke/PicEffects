@@ -17,8 +17,8 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
     private static final double WHRatio = 5.0/11.0; //46;
     private static final char[][] SYMBOLS = new char[][] {
             new char[] {'#', '%'},
-            new char[] {'|', '[', ']', '/', '\\', '*'},
-            new char[] {'-', '_', '^', '<', '>', '=', '+', ':'},
+            new char[] {'|', '/', '\\', '*', '_', '^'},
+            new char[] {'-', '_', '^', '<', '>', '=', ':'},
             new char[] {' ', '\'', '.'}
     };
 
@@ -71,13 +71,15 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
         charsY = (int)(WHRatio * charsX * imageHeight / imageWidth);
+        int[][] darkness = new int[9][5];
         for(int j = 0; j < charsY; j++) {
             for(int i = 0; i < charsX; i++) {
                 int x1 = imageWidth  *   i   / charsX;
-                int x2 = imageWidth  * (i+1) / charsX;
                 int y1 = imageHeight *   j   / charsY;
-                int y2 = imageHeight * (j+1) / charsY;
-                mResults.append(getChar(x1, y1, x2, y2, image));
+                for(int k = 0; k < 9; k++) {
+                    image.getPixels(darkness[k], 0, imageWidth, x1, y1+1 + k, 5, 1);
+                }
+                mResults.append(getChar(darkness));
             }
             publishResults();
             mResults.append("\n");
@@ -85,24 +87,25 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
         mResults.append("\n\n");
     }
 
-    private char getChar(int x1, int y1, int x2, int y2, Bitmap image) {
-        int brightnessLevel = getBrightnessLevel(x1, y1, x2, y2, image);
-        char[] chars = SYMBOLS[brightnessLevel];
-
-        return chars[0];
-    }
-
-    private int getBrightnessLevel(int x1, int y1, int x2, int y2, Bitmap image) {
+    private char getChar(int[][] darkness) {
         int brightness = 0;
-        for(int i = x1; i < x2; i++) {
-            for(int j = y1; j < y2; j++) {
-                int color = image.getPixel(i, j);
+        for(int x = 0; x < 5; x++) {
+            for(int y = 0; y < 9; y++) {
+                int color = darkness[y][x];
                 float[] rgb = { Color.red(color), Color.green(color), Color.blue(color) };
                 brightness += (int) ((rgb[0]*.241) + (rgb[1]*.691) + (rgb[2]*.068));
             }
         }
-        brightness /= ((x2-x1) * (y2-y1));
-        return brightness / 64; // 0,1,2,3
+        brightness /= (5*9);
+        int index = brightness / 64; // 0,1,2,3
+        char[] chars = SYMBOLS[index];
+        for(int x = 0; x < 5; x++) {
+            for(int y = 0; y < 9; y++) {
+                int color = darkness[y][x];
+            }
+        }
+
+        return chars[0];
     }
 
     @Override
