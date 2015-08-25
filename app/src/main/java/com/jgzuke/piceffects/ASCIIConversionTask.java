@@ -15,12 +15,6 @@ import java.io.IOException;
  */
 public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
     private static final double WHRatio = 5.0/11.0; //46;
-    private static final char[][] SYMBOLS = new char[][] {
-            new char[] {'#', '%'},
-            new char[] {'|', '/', '\\', '*', '_', '^'},
-            new char[] {'-', '_', '^', '<', '>', '=', ':'},
-            new char[] {' ', '\'', '.'}
-    };
 
     private int charsX = 110;
     private int charsY;
@@ -88,6 +82,21 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
     }
 
     private char getChar(int[][] darkness) {
+        int index = getBrightness(darkness);
+        boolean[][][] charArray = ASCIIConstants.BOOLEAN_SYMBOLS[index];
+        int bestScore = Integer.MAX_VALUE;
+        int bestScoreIndex = 0;
+        for(int i = 0; i < charArray.length; i++) {
+            int score = getCharScore(darkness, charArray[i], bestScore);
+            if(score < bestScore) {
+                bestScore = score;
+                bestScoreIndex = i;
+            }
+        }
+        return ASCIIConstants.CHAR_SYMBOLS[index][bestScoreIndex];
+    }
+
+    private int getBrightness(int[][] darkness) {
         int brightness = 0;
         for(int x = 0; x < 5; x++) {
             for(int y = 0; y < 9; y++) {
@@ -97,15 +106,24 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
             }
         }
         brightness /= (5*9);
-        int index = brightness / 64; // 0,1,2,3
-        char[] chars = SYMBOLS[index];
+        return brightness / 64; // 0,1,2,3
+    }
+
+    private int getCharScore(int[][] darkness, boolean[][] charDarkness, int currentBest) {
+        int score = 0;
         for(int x = 0; x < 5; x++) {
             for(int y = 0; y < 9; y++) {
                 int color = darkness[y][x];
+                float[] rgb = { Color.red(color), Color.green(color), Color.blue(color) };
+                int light = (int) ((rgb[0]*.241) + (rgb[1]*.691) + (rgb[2]*.068));
+
+                score += charDarkness[y][x]? light : 255 - light;
+                if(score >= currentBest) {
+                    return Integer.MAX_VALUE;
+                }
             }
         }
-
-        return chars[0];
+        return score;
     }
 
     @Override
