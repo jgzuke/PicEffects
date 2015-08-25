@@ -2,6 +2,7 @@ package com.jgzuke.piceffects;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,26 +17,26 @@ import java.util.Arrays;
  */
 public class DisplayASCIIFragment extends BaseFragment {
     private TextView mASCIIDisplay;
-    private View mASCIIDisplayContainer;
-
+    private View mASCIIContainer;
     private String mResults;
+    private View mRetry;
     private int mCharsX;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         final View view = inflater.inflate(R.layout.fragment_display_ascii, container, false);
 
-        mASCIIDisplayContainer = view.findViewById(R.id.ascii_display_container);
-
+        mASCIIContainer = view.findViewById(R.id.ascii_display_container);
         mASCIIDisplay = (TextView) view.findViewById(R.id.ascii_display);
 
         char[] array = new char[mCharsX];
         Arrays.fill(array, ' ');
         mASCIIDisplay.setText(new String(array));
         mASCIIDisplay.setTypeface(Typeface.MONOSPACE);
+        mASCIIDisplay.setMovementMethod(new ScrollingMovementMethod());
 
-        View retryButton = view.findViewById(R.id.retry_button);
-        retryButton.setOnClickListener(new View.OnClickListener() {
+        mRetry = view.findViewById(R.id.retry_button);
+        mRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 restartFromBeginning();
@@ -62,7 +63,7 @@ public class DisplayASCIIFragment extends BaseFragment {
     private void resizeText() {
         float textWidth = mASCIIDisplay.getMeasuredWidth();
 
-        float containerWidth = mASCIIDisplayContainer.getMeasuredWidth();
+        float containerWidth = mASCIIContainer.getMeasuredWidth();
         float textSize = containerWidth / textWidth;
         mASCIIDisplay.setTextSize(textSize);
     }

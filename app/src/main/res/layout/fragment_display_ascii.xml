@@ -5,17 +5,20 @@
     android:layout_height="match_parent"
     android:padding="30dp" >
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/ascii_display_container"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:gravity="center" >
         <TextView
             android:id="@+id/ascii_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="1sp" />
-    </ScrollView>
+            android:textSize="1sp"
+            android:scrollbars = "vertical"
+            android:maxLines = "500"/>
+    </LinearLayout>
 
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/retry_button"
