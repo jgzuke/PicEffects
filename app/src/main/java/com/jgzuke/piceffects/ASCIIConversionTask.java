@@ -83,17 +83,26 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
 
     private char getChar(int[][] darkness) {
         int index = getBrightness(darkness);
-        boolean[][][] charArray = ASCIIConstants.BOOLEAN_SYMBOLS[index];
+        boolean[][][] charArray = ASCIIConstants.BOOLEAN_SYMBOLS;
         int bestScore = Integer.MAX_VALUE;
         int bestScoreIndex = 0;
         for(int i = 0; i < charArray.length; i++) {
-            int score = getCharScore(darkness, charArray[i], bestScore);
-            if(score < bestScore) {
-                bestScore = score;
-                bestScoreIndex = i;
+            if(index - i >= 0) {
+                int score = getCharScore(darkness, charArray[index - i], bestScore, index, index - i);
+                if(score < bestScore) {
+                    bestScore = score;
+                    bestScoreIndex = index - i;
+                }
+            }
+            if(index + i < charArray.length) {
+                int score = getCharScore(darkness, charArray[index + i], bestScore, index, index + i);
+                if(score < bestScore) {
+                    bestScore = score;
+                    bestScoreIndex = index + i;
+                }
             }
         }
-        return ASCIIConstants.CHAR_SYMBOLS[index][bestScoreIndex];
+        return ASCIIConstants.CHAR_SYMBOLS[bestScoreIndex];
     }
 
     private int getBrightness(int[][] darkness) {
@@ -106,11 +115,11 @@ public class ASCIIConversionTask extends AsyncTask<Uri[], String, Void> {
             }
         }
         brightness /= (5*9);
-        return brightness / 64; // 0,1,2,3
+        return brightness / 18; // 0-14
     }
 
-    private int getCharScore(int[][] darkness, boolean[][] charDarkness, int currentBest) {
-        int score = 0;
+    private int getCharScore(int[][] darkness, boolean[][] charDarkness, int currentBest, int index1, int index2) {
+        int score = ASCIIConstants.getBrightnessDistanceScoreBase(index1, index2);
         for(int x = 0; x < 5; x++) {
             for(int y = 0; y < 9; y++) {
                 int color = darkness[y][x];

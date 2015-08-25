@@ -6,7 +6,7 @@ package com.jgzuke.piceffects;
 public class ASCIIConstants {
     private static final boolean T = true;
     private static final boolean f = false;
-    protected static final boolean[][] aa = new boolean[][] { // '#'
+    protected static final boolean[][] a1 = new boolean[][] { // '#'
             {f, f, T, T, T},
             {f, T, T, T, T},
             {T, T, T, T, T},
@@ -17,7 +17,7 @@ public class ASCIIConstants {
             {T, T, T, T, f},
             {T, T, T, f, f}
     };
-    protected static final boolean[][] ab = new boolean[][] { // '%'
+    protected static final boolean[][] b1 = new boolean[][] { // '%'
             {T, T, T, f, f},
             {T, T, T, f, f},
             {T, T, T, T, f},
@@ -28,7 +28,7 @@ public class ASCIIConstants {
             {f, f, T, T, T},
             {f, f, T, T, T}
     };
-    protected static final boolean[][] ba = new boolean[][] { // '|'
+    protected static final boolean[][] c1 = new boolean[][] { // '|'
             {f, T, T, T, f},
             {f, T, T, T, f},
             {f, T, T, T, f},
@@ -39,7 +39,8 @@ public class ASCIIConstants {
             {f, T, T, T, f},
             {f, T, T, T, f}
     };
-    protected static final boolean[][] bb = new boolean[][] { // '/'
+    protected static final boolean[][] c2 = new boolean[][] { // '/'
+            {f, f, f, T, T},
             {f, f, f, T, T},
             {f, f, T, T, T},
             {f, f, T, T, T},
@@ -47,10 +48,21 @@ public class ASCIIConstants {
             {f, T, T, T, f},
             {T, T, T, T, f},
             {T, T, T, f, f},
+            {T, T, T, f, f}
+    };
+    protected static final boolean[][] c3 = new boolean[][] { // '/'
+            {f, f, T, T, T},
+            {f, f, T, T, T},
+            {f, T, T, T, T},
+            {f, T, T, T, f},
+            {T, T, T, T, f},
             {T, T, T, f, f},
+            {T, T, T, f, f},
+            {T, T, f, f, f},
             {T, T, f, f, f}
     };
-    protected static final boolean[][] bc = new boolean[][] { // '\'
+    protected static final boolean[][] c4 = new boolean[][] { // '\'
+            {T, T, f, f, f},
             {T, T, f, f, f},
             {T, T, T, f, f},
             {T, T, T, f, f},
@@ -58,10 +70,20 @@ public class ASCIIConstants {
             {f, T, T, T, f},
             {f, T, T, T, T},
             {f, f, T, T, T},
+            {f, f, T, T, T}
+    };
+    protected static final boolean[][] c5 = new boolean[][] { // '\'
+            {T, T, T, f, f},
+            {T, T, T, f, f},
+            {T, T, T, T, f},
+            {f, T, T, T, f},
+            {f, T, T, T, T},
             {f, f, T, T, T},
+            {f, f, T, T, T},
+            {f, f, f, T, T},
             {f, f, f, T, T}
     };
-    protected static final boolean[][] bd = new boolean[][] { // '*'
+    protected static final boolean[][] d1 = new boolean[][] { // '*'
             {f, f, f, f, f},
             {f, f, f, f, f},
             {f, T, T, T, f},
@@ -72,7 +94,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final boolean[][] be = new boolean[][] { // '^'
+    protected static final boolean[][] d2 = new boolean[][] { // '^'
             {f, f, T, f, f},
             {f, T, T, T, f},
             {T, T, T, T, T},
@@ -83,7 +105,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final boolean[][] ca = new boolean[][] { // '-'
+    protected static final boolean[][] e1 = new boolean[][] { // '-'
             {f, f, f, f, f},
             {f, f, f, f, f},
             {f, f, f, f, f},
@@ -94,7 +116,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final boolean[][] cb = new boolean[][] { // '_'
+    protected static final boolean[][] e2 = new boolean[][] { // '_'
             {f, f, f, f, f},
             {f, f, f, f, f},
             {f, f, f, f, f},
@@ -105,7 +127,7 @@ public class ASCIIConstants {
             {T, T, T, T, T},
             {T, T, T, T, T}
     };
-    protected static final boolean[][] cc = new boolean[][] { // '^'
+    protected static final boolean[][] e3 = new boolean[][] { // '"'
             {T, T, T, T, T},
             {T, T, T, T, T},
             {T, T, T, T, T},
@@ -116,7 +138,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final boolean[][] da = new boolean[][] { // '''
+    protected static final boolean[][] f1 = new boolean[][] { // '''
             {f, f, T, f, f},
             {f, f, f, f, f},
             {f, f, f, f, f},
@@ -127,7 +149,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final boolean[][] db = new boolean[][] { // '.'
+    protected static final boolean[][] f2 = new boolean[][] { // '.'
             {f, f, f, f, f},
             {f, f, f, f, f},
             {f, f, f, f, f},
@@ -138,7 +160,7 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, T, f, f}
     };
-    protected static final boolean[][] dc = new boolean[][] { // ' '
+    protected static final boolean[][] g = new boolean[][] { // ' '
             {f, f, f, f, f},
             {f, f, f, f, f},
             {f, f, f, f, f},
@@ -149,16 +171,56 @@ public class ASCIIConstants {
             {f, f, f, f, f},
             {f, f, f, f, f}
     };
-    protected static final char[][] CHAR_SYMBOLS = new char[][] {
-            {'#', '%'},
-            {'|', '/', '\\', '*', '^'},     //, '*', '_', '^'},
-            {'-', '_', '"'},     //, '<', '>', '=', ':'},
-            {'\'', '.', ' '}     //, '.'}
+
+
+
+
+    /*
+    a1 '#'
+    b1 '%'
+    c1 '|'
+    c2 '/'
+    c3 '/'
+    c4 '\'
+    c5 '\'
+    d1 '*'
+    d2 '^'
+    e1 '-'
+    e2 '_'
+    e3 '"'
+    f1 '''
+    f2 '.'
+    g ' '
+    */
+    protected static final char[] CHAR_SYMBOLS = new char[] {
+            '#',
+            '%',
+            '|', '/', '/', '\\', '\\',
+            '*', '^',
+            '-', '_', '"',
+            '\'', '.',
+            ' '
     };
-    protected static final boolean[][][][] BOOLEAN_SYMBOLS = new boolean[][][][] {
-            {aa, ab},
-            {ba, bb, bc, bd, be},
-            {ca, cb, cc},
-            {da, db, dc}
+    protected static final boolean[][][] BOOLEAN_SYMBOLS = new boolean[][][] {
+            a1,
+            b1,
+            c1, c2, c3, c4, c5,
+            d1, d2,
+            e1, e2, e3,
+            f1, f2,
+            g
     };
+
+    protected static final int[] BRIGHTNESS_LEVELS = new int[] {
+            0,
+            1,
+            2, 2, 2, 2, 2,
+            3, 3,
+            4, 4, 4,
+            5, 5,
+            6
+    };
+    protected static int getBrightnessDistanceScoreBase(int index1, int index2) {
+        return 800 * Math.abs(BRIGHTNESS_LEVELS[index1] - BRIGHTNESS_LEVELS[index2]);
+    }
 }
